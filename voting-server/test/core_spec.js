@@ -137,5 +137,24 @@ describe('application logic', () => {
         }
       }));
     });
+
+    it('disallows voting for an invalid option', () => {
+      const state = fromJS({
+        pair: ['Trainspotting', '28 Days Later'],
+        tally: {
+          'Trainspotting': 3,
+          '28 Days Later': 2
+        }
+      });
+
+      const nextState = vote(state, 'Invalid Option');
+      expect(nextState).to.equal(fromJS({
+        pair: ['Trainspotting', '28 Days Later'],
+        tally: {
+          'Trainspotting': 3,
+          '28 Days Later': 2
+        }
+      }));
+    });
   });
 });
